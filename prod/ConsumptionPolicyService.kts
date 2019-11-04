@@ -16,11 +16,16 @@ object : ConsumptionPolicy {
     override fun checkConsumption(
             msisdn: String,
             multipleServiceCreditControl: MultipleServiceCreditControl,
-            mccMnc: String,
-            apn: String): Either<ConsumptionResult, ConsumptionRequest> {
+            sgsnMccMnc: String,
+            apn: String,
+            imsiMccMnc: String): Either<ConsumptionResult, ConsumptionRequest> {
 
         val requested = multipleServiceCreditControl.requested?.totalOctets ?: 0
         val used = multipleServiceCreditControl.used?.totalOctets ?: 0
+
+        if (!isMccMncAllowed(sgsnMccMnc, imsiMccMnc)) {
+            return blockConsumption(msisdn)
+        }
 
         return when (ServiceIdRatingGroup(
                 serviceId = multipleServiceCreditControl.serviceIdentifier,
@@ -50,13 +55,24 @@ object : ConsumptionPolicy {
             }
 
             // BLOCKED
-            else -> {
-                ConsumptionResult(
-                        msisdnAnalyticsId = msisdn,
-                        granted = 0L,
-                        balance = 0L
-                ).left()
-            }
+            else -> blockConsumption(msisdn)
+        }
+    }
+
+    fun blockConsumption(msisdn: String) : Either<ConsumptionResult, ConsumptionRequest> {
+        return ConsumptionResult(
+                msisdnAnalyticsId = msisdn,
+                granted = 0L,
+                balance = 0L
+        ).left()
+    }
+
+    fun isMccMncAllowed(sgsnMccMnc: String, imsiMccMnc: String) : Boolean {
+        return when (imsiMccMnc) {
+            "52503" -> true  // M1
+            "50216" -> true  // Digi
+            "24201" -> true  // Telenor Norway
+            else -> false
         }
     }
 }
