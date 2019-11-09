@@ -11,6 +11,12 @@ private data class ServiceIdRatingGroup(
         val ratingGroup: Long
 )
 
+private val digiAllowedMcc =  setOf(
+        "525", //Singapore
+        "502", //Malaysia
+        "242" // Norway
+        )
+
 object : ConsumptionPolicy {
 
     override fun checkConsumption(
@@ -68,9 +74,10 @@ object : ConsumptionPolicy {
     }
 
     fun isMccMncAllowed(sgsnMccMnc: String, imsiMccMnc: String) : Boolean {
+        val sgsnMcc = sgsnMccMnc.substring(range = 0..2)
         return when (imsiMccMnc) {
             "52503" -> true  // M1
-            "50216" -> true  // Digi
+            "50216" -> digiAllowedMcc.contains(sgsnMcc)  // Digi
             "24201" -> true  // Telenor Norway
             else -> false
         }
