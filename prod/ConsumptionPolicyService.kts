@@ -2,6 +2,7 @@ import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
 import org.ostelco.ocs.api.MultipleServiceCreditControl
+import org.ostelco.prime.getLogger
 import org.ostelco.prime.ocs.core.ConsumptionPolicy
 import org.ostelco.prime.ocs.core.ConsumptionRequest
 import org.ostelco.prime.storage.ConsumptionResult
@@ -11,11 +12,25 @@ private data class ServiceIdRatingGroup(
         val ratingGroup: Long
 )
 
-private val digiAllowedMcc =  setOf(
-        "525", //Singapore
-        "502", //Malaysia
-        "242" // Norway
+private val logger by getLogger()
+
+private val digiAllowedMcc = setOf(
+        Mcc.MALAYSIA.value,
+        Mcc.SINGAPORE.value,
+        Mcc.NORWAY.value
         )
+
+enum class Mcc(val value: String) {
+    SINGAPORE("525"),
+    MALAYSIA("503"),
+    NORWAY("242")
+}
+
+enum class MccMnc(val value: String) {
+    M1("52503"),
+    DIGI("50216"),
+    LOLTEL("24201")
+}
 
 object : ConsumptionPolicy {
 
@@ -30,6 +45,7 @@ object : ConsumptionPolicy {
         val used = multipleServiceCreditControl.used?.totalOctets ?: 0
 
         if (!isMccMncAllowed(sgsnMccMnc, imsiMccMnc)) {
+            logger.warn("Blocked usage for sgsnMccMnc $sgsnMccMnc imsiMccMnc $imsiMccMnc msisdn $msisdn ")
             return blockConsumption(msisdn)
         }
 
@@ -76,9 +92,9 @@ object : ConsumptionPolicy {
     fun isMccMncAllowed(sgsnMccMnc: String, imsiMccMnc: String) : Boolean {
         val sgsnMcc = sgsnMccMnc.substring(range = 0..2)
         return when (imsiMccMnc) {
-            "52503" -> true  // M1
-            "50216" -> digiAllowedMcc.contains(sgsnMcc)  // Digi
-            "24201" -> true  // Telenor Norway
+            MccMnc.M1.value -> true
+            MccMnc.DIGI.value -> digiAllowedMcc.contains(sgsnMcc)
+            MccMnc.LOLTEL.value -> true
             else -> false
         }
     }
