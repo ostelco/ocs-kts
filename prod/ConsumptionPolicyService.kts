@@ -12,23 +12,6 @@ private data class ServiceIdRatingGroup(
         val ratingGroup: Long
 )
 
-private val logger by getLogger()
-
-private val digiAllowedMcc = setOf(
-        Mcc.AUSTRALIA.value,
-        Mcc.CHINA.value,
-        Mcc.HONG_KONG.value,
-        Mcc.INDONESIA.value,
-        Mcc.JAPAN.value,
-        Mcc.MALAYSIA.value,
-        Mcc.NORWAY.value,
-        Mcc.PHILIPPINES.value,
-        Mcc.SINGAPORE.value,
-        Mcc.THAILAND.value,
-        Mcc.SOUTH_KOREA.value,
-        Mcc.VIET_NAM.value
-        )
-
 enum class Mcc(val value: String) {
     AUSTRALIA("505"),
     CHINA("460"),
@@ -51,6 +34,23 @@ enum class MccMnc(val value: String) {
 }
 
 object : ConsumptionPolicy {
+
+    private val logger by getLogger()
+
+    private val digiAllowedMcc = setOf(
+            Mcc.AUSTRALIA.value,
+            Mcc.CHINA.value,
+            Mcc.HONG_KONG.value,
+            Mcc.INDONESIA.value,
+            Mcc.JAPAN.value,
+            Mcc.MALAYSIA.value,
+            Mcc.NORWAY.value,
+            Mcc.PHILIPPINES.value,
+            Mcc.SINGAPORE.value,
+            Mcc.THAILAND.value,
+            Mcc.SOUTH_KOREA.value,
+            Mcc.VIET_NAM.value
+    )
 
     override fun checkConsumption(
             msisdn: String,
