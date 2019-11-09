@@ -15,15 +15,33 @@ private data class ServiceIdRatingGroup(
 private val logger by getLogger()
 
 private val digiAllowedMcc = setOf(
+        Mcc.AUSTRALIA.value,
+        Mcc.CHINA.value,
+        Mcc.HONG_KONG.value,
+        Mcc.INDONESIA.value,
+        Mcc.JAPAN.value,
         Mcc.MALAYSIA.value,
+        Mcc.NORWAY.value,
+        Mcc.PHILIPPINES.value,
         Mcc.SINGAPORE.value,
-        Mcc.NORWAY.value
+        Mcc.THAILAND.value,
+        Mcc.SOUTH_KOREA.value,
+        Mcc.VIET_NAM.value
         )
 
 enum class Mcc(val value: String) {
+    AUSTRALIA("505"),
+    CHINA("460"),
+    HONG_KONG("454"),
+    INDONESIA("510"),
+    JAPAN("440"),
+    MALAYSIA("502"),
+    NORWAY("242"),
+    PHILIPPINES("515"),
+    THAILAND("520"),
     SINGAPORE("525"),
-    MALAYSIA("503"),
-    NORWAY("242")
+    SOUTH_KOREA("450"),
+    VIET_NAM("452")
 }
 
 enum class MccMnc(val value: String) {
