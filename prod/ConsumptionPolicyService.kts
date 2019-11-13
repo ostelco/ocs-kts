@@ -32,7 +32,9 @@ object : ConsumptionPolicy {
             Mcc.SINGAPORE.value,
             Mcc.THAILAND.value,
             Mcc.SOUTH_KOREA.value,
-            Mcc.VIET_NAM.value
+            Mcc.VIET_NAM.value,
+            Mcc.UNITED_KINGDOM.value,
+            Mcc.UNITED_STATES.value
     )
 
     override fun checkConsumption(
