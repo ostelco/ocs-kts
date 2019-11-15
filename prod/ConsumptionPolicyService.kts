@@ -101,11 +101,18 @@ object : ConsumptionPolicy {
         ).left()
     }
 
+    fun isAllowedForDigi(sgsnMccMnc : String) : Boolean {
+        if ( sgsnMccMnc.length > 3) {
+            val sgsnMcc = sgsnMccMnc.substring(range = 0..2)
+            return digiAllowedMcc.contains(sgsnMcc)
+        }
+        return false
+    }
+
     fun isMccMncAllowed(sgsnMccMnc: String, imsiMccMnc: String) : Boolean {
-        val sgsnMcc = sgsnMccMnc.substring(range = 0..2)
         return when (imsiMccMnc) {
             MccMnc.M1.value -> true
-            MccMnc.DIGI.value -> digiAllowedMcc.contains(sgsnMcc)
+            MccMnc.DIGI.value -> isAllowedForDigi(sgsnMccMnc)
             MccMnc.LOLTEL.value -> true
             else -> false
         }
