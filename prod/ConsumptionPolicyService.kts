@@ -22,19 +22,28 @@ object : ConsumptionPolicy {
 
     private val digiAllowedMcc = setOf(
             Mcc.AUSTRALIA.value,
+            Mcc.BRUNEI.value,
+            Mcc.CAMBODIA.value,
             Mcc.CHINA.value,
+            Mcc.TIMOR.value,
             Mcc.HONG_KONG.value,
+            Mcc.INDIA.value,
             Mcc.INDONESIA.value,
             Mcc.JAPAN.value,
+            Mcc.LAOS.value,
+            Mcc.MACAO.value,
             Mcc.MALAYSIA.value,
-            Mcc.NORWAY.value,
+            Mcc.MYANMAR.value,
+            Mcc.NEW_ZEALAND.value,
+            Mcc.PAKISTAN.value,
             Mcc.PHILIPPINES.value,
             Mcc.SINGAPORE.value,
-            Mcc.THAILAND.value,
             Mcc.SOUTH_KOREA.value,
-            Mcc.VIET_NAM.value,
+            Mcc.TAIWAN.value,
+            Mcc.THAILAND.value,
             Mcc.UNITED_KINGDOM.value,
-            Mcc.UNITED_STATES.value
+            Mcc.UNITED_STATES.value,
+            Mcc.VIET_NAM.value
     )
 
     override fun checkConsumption(
