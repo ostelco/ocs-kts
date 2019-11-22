@@ -35,6 +35,7 @@ object : ConsumptionPolicy {
             Mcc.MALAYSIA.value,
             Mcc.MYANMAR.value,
             Mcc.NEW_ZEALAND.value,
+            Mcc.NORWAY.value,
             Mcc.PAKISTAN.value,
             Mcc.PHILIPPINES.value,
             Mcc.SINGAPORE.value,
