@@ -48,7 +48,7 @@ object : ConsumptionPolicy {
     )
 
     // While testing we have some SIMs that are testing roaming, these should never block on MCC
-    private val digiFreeRoamingMsisdns = arrayOf("601170510052", "60162746973", "60162730576", "60143229458")
+    private val digiFreeRoamingMsisdns = arrayOf("601170510052", "60162746973", "60162730576", "60143229458", "601170510005", "601170510006")
 
     override fun checkConsumption(
             msisdn: String,
