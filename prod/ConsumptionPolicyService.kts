@@ -60,7 +60,7 @@ object : ConsumptionPolicy {
         val requested = multipleServiceCreditControl.requested?.totalOctets ?: 0
         val used = multipleServiceCreditControl.used?.totalOctets ?: 0
 
-        if (!isMccMncAllowed(sgsnMccMnc, imsiMccMnc) && !digiFreeRoamingMsisdns.contains(msisdn)) {
+        if (!isMccMncAllowed(sgsnMccMnc, imsiMccMnc)) {
             logger.warn("Blocked usage for sgsnMccMnc $sgsnMccMnc imsiMccMnc $imsiMccMnc msisdn $msisdn ")
             return blockConsumption(msisdn)
         }
