@@ -115,8 +115,8 @@ object : ConsumptionPolicy {
 
     fun isMccMncAllowed(sgsnMccMnc: String, imsiMccMnc: String) : Boolean {
         return when (imsiMccMnc) {
-            MccMnc.M1.value -> true
-            MccMnc.DIGI.value -> isAllowedForDigi(sgsnMccMnc)
+            MccMnc.M1.value -> false
+            MccMnc.DIGI.value -> false
             MccMnc.LOLTEL.value -> true
             else -> false
         }
