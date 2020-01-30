@@ -1,8 +1,7 @@
 # ocs-kts
 Kotlin Scripts for ocs-ktc project in ostelco-core repo.
 
-For the repo [ostelco-core](https://github.com/ostelco/ostelco-core), since we do not want to keep our business logic in
-an open source project, that logic is moved to Kotlin script files.
+For the repo [ostelco-core](https://github.com/ostelco/ostelco-core), since we do not want to keep our business logic somewhat separately, that logic is moved to Kotlin script files.
   
 Those kotlin scripts for the project [ocs-ktc](https://github.com/ostelco/ostelco-core/tree/develop/ocs-ktc)
 in `ostelco/ostelco-core` repo are kept in this repo.
